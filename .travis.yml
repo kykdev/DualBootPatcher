@@ -17,16 +17,16 @@ script:
   # Build APK
   - |
     docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/builder/DualBootPatcher:rw,z" -v "${HOME}/.android:/builder/.android:rw,z" yshalsager/dualbootpatcher:9.3.0-6-android bash << EOF
-    cd DualBootPatcher/builder && cmake .. -DMBP_BUILD_TARGET=android -DMBP_BUILD_TYPE=debug && make -j16 && rm -rf assets && cpack && make apk -j16
-    make android-system_armeabi-v7a -j16 && make -C data/devices -j16
+    cd DualBootPatcher/builder && ( cmake .. -DMBP_BUILD_TARGET=android -DMBP_BUILD_TYPE=debug && make -j16 && rm -rf assets && cpack && make apk -j16 ) >/dev/null
+    ( make android-system_armeabi-v7a -j16 && make -C data/devices -j16 ) >/dev/null
     exit
     EOF
   - |
     docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/builder/DualBootPatcher:rw,z" -v "${HOME}/.android:/builder/.android:rw,z" yshalsager/dualbootpatcher:9.3.0-6-linux bash << EOF
     # Build Utilities Zip
-    cd ~/DualBootPatcher/builder && ./utilities/create.sh
+    cd ~/DualBootPatcher/builder && ./utilities/create.sh >/dev/null
     # Build Linux
-    cmake .. -DMBP_BUILD_TARGET=desktop -DMBP_PORTABLE=ON && make -j16 && cpack
+    ( cmake .. -DMBP_BUILD_TARGET=desktop -DMBP_PORTABLE=ON && make -j16 && cpack ) >/dev/null
     exit
     EOF
 after_success:
