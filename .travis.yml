@@ -25,20 +25,24 @@ script:
     docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/builder/DualBootPatcher:rw,z" -v "${HOME}/.android:/builder/.android:rw,z" yshalsager/dualbootpatcher:9.3.0-6-linux bash << EOF
     # Build Utilities Zip
     cd ~/DualBootPatcher/builder && ./utilities/create.sh >/dev/null
-    # Build Linux
-    ( cmake .. -DMBP_BUILD_TARGET=desktop -DMBP_PORTABLE=ON && make -j16 && cpack ) >/dev/null
+    exit
+    EOF
+  - |
+    docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/builder/DualBootPatcher:rw,z" -v "${HOME}/.android:/builder/.android:rw,z" yshalsager/dualbootpatcher:9.3.0-6-mingw bash << EOF
+    # Build Windows
+    ( cd ~/DualBootPatcher/builder && sed -e "s,@MINGW_TRIPLET@,$(rpm -E '%{mingw32_target}'),g" -e "s,@MINGW_ROOT_PATH@,$(rpm -E '%{mingw32_prefix}'),g" < ../cmake/toolchain-mingw.cmake.in > ../cmake/toolchain-mingw.cmake && cmake .. -DMBP_BUILD_TARGET=desktop ec^CMBP_PORTABLE=ON -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchain-mingw.cmake && make -j16 && cpack && unzip DualBootPatcher-9.3.0-win32.zip && rm DualBootPatcher-9.3.0-win32.zip && pushd DualBootPatcher-9.3.0-win32 && dlls=(iconv.dll libarchive-13.dll libbz2-1.dll libcrypto-10.dll libgcc_s_sjlj-1.dll libGLESv2.dll libglib-2.0-0.dll libharfbuzz-0.dll libintl-8.dll liblz4.dll liblzma-5.dll libpcre-1.dll libpcre16-0.dll libpng16-16.dll libstdc++-6.dll libwinpthread-1.dll libxml2-2.dll Qt5Core.dll Qt5Gui.dll Qt5Widgets.dll zlib1.dll) && for dll in "${dlls[@]}"; do cp "${MINGW_ROOT_PATH}/bin/${dll}" .; done && mkdir platforms/ cp "$(rpm -E '%{mingw32_prefix}')"/lib/qt5/plugins/platforms/qwindows.dll platforms/ && find -name '*.exe' -o -name '*.dll' -exec strip {} \+ && popd && zip -r DualBootPatcher-9.3.0-win32.zip DualBootPatcher-9.3.0-win32 ) >/dev/null
     exit
     EOF
 after_success:
-  - export TRAVIS_CURRENT_DATE=$(date +"%d%m%y-%Hh%Mm")
+  - export TRAVIS_CURRENT_DATE=$(date +"%y%m%d-%Hh%Mm")
   # Check output & md5sum
   - ls -l ${TRAVIS_BUILD_DIR}/DualBootPatcher/Android_GUI/build/outputs/apk/debug/Android_GUI-debug.apk
   - md5sum ${TRAVIS_BUILD_DIR}/DualBootPatcher/Android_GUI/build/outputs/apk/debug/Android_GUI-debug.apk
   - ls -l ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/utilities/DualBootUtilities-9.3.0.zip
   - md5sum ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/utilities/DualBootUtilities-9.3.0.zip
-  - ls -l ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/DualBootPatcher-9.3.0-Linux.zip
-  - md5sum ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/DualBootPatcher-9.3.0-Linux.zip
+  - ls -l ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/DualBootPatcher-9.3.0-win32.zip
+  - md5sum ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/DualBootPatcher-9.3.0-win32.zip
   # Upload to transfer.sh
   - cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/Android_GUI/build/outputs/apk/debug/ &&  curl --upload-file ./Android_GUI-debug.apk https://transfer.sh/Android_GUI-debug-${TRAVIS_CURRENT_DATE}.apk
   - cd ${TRAVIS_BUILD_DIR}//DualBootPatcher/builder/utilities/ && curl --upload-file ./DualBootUtilities-9.3.0.zip https://transfer.sh/DualBootUtilities-9.3.0-${TRAVIS_CURRENT_DATE}.zip
-  - cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/ && curl --upload-file ./DualBootPatcher-9.3.0-Linux.zip https://transfer.sh/DualBootPatcher-9.3.0-${TRAVIS_CURRENT_DATE}-Linux.zip
+  - cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/ && curl --upload-file ./DualBootPatcher-9.3.0-win32.zip https://transfer.sh/DualBootPatcher-9.3.0-${TRAVIS_CURRENT_DATE}-win32.zip
