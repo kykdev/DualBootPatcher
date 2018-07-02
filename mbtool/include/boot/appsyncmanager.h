@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018  Andrew Gunnerson <andrewgunnerson@gmail.com>
+ * Copyright (C) 2015  Andrew Gunnerson <andrewgunnerson@gmail.com>
  *
  * This file is part of DualBootPatcher
  *
@@ -19,18 +19,35 @@
 
 #pragma once
 
-#include "mbcommon/common.h"
+#include <string>
 
-#include <string_view>
-
-#include "mbcommon/outcome.h"
+#include "boot/packages.h"
+#include "util/roms.h"
+#include "util/romconfig.h"
 
 namespace mb
 {
 
-MB_EXPORT oc::result<std::wstring> mbs_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_mbs(std::wstring_view str);
-MB_EXPORT oc::result<std::wstring> utf8_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_utf8(std::wstring_view str);
+struct RomConfigAndPackages
+{
+    std::shared_ptr<Rom> rom;
+    RomConfig config;
+    Packages packages;
+};
+
+class AppSyncManager
+{
+public:
+    static void detect_directories();
+
+    static std::string get_shared_data_path(const std::string &pkg);
+
+    static bool initialize_directories();
+    static bool create_shared_data_directory(const std::string &pkg, uid_t uid);
+    static bool fix_shared_data_permissions();
+
+    static bool mount_shared_directory(const std::string &pkg, uid_t uid);
+    static bool unmount_shared_directory(const std::string &pkg);
+};
 
 }

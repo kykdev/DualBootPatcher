@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018  Andrew Gunnerson <andrewgunnerson@gmail.com>
+ * Copyright (C) 2017-2018  Andrew Gunnerson <andrewgunnerson@gmail.com>
  *
  * This file is part of DualBootPatcher
  *
@@ -19,18 +19,36 @@
 
 #pragma once
 
-#include "mbcommon/common.h"
-
-#include <string_view>
-
-#include "mbcommon/outcome.h"
+#include <functional>
+#include <string>
 
 namespace mb
 {
 
-MB_EXPORT oc::result<std::wstring> mbs_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_mbs(std::wstring_view str);
-MB_EXPORT oc::result<std::wstring> utf8_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_utf8(std::wstring_view str);
+using RamdiskPatcherFn = bool(const std::string &dir);
+
+std::function<RamdiskPatcherFn>
+rp_write_rom_id(const std::string &rom_id);
+
+std::function<RamdiskPatcherFn>
+rp_restore_default_prop();
+
+std::function<RamdiskPatcherFn>
+rp_add_dbp_prop(const std::string &device_id, bool use_fuse_exfat);
+
+std::function<RamdiskPatcherFn>
+rp_add_binaries(const std::string &binaries_dir);
+
+std::function<RamdiskPatcherFn>
+rp_symlink_fuse_exfat();
+
+std::function<RamdiskPatcherFn>
+rp_symlink_init();
+
+std::function<RamdiskPatcherFn>
+rp_restore_init();
+
+std::function<RamdiskPatcherFn>
+rp_add_device_json(const std::string &device_json_file);
 
 }

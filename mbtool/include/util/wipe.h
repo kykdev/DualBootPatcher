@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018  Andrew Gunnerson <andrewgunnerson@gmail.com>
+ * Copyright (C) 2015  Andrew Gunnerson <andrewgunnerson@gmail.com>
  *
  * This file is part of DualBootPatcher
  *
@@ -19,18 +19,17 @@
 
 #pragma once
 
-#include "mbcommon/common.h"
-
-#include <string_view>
-
-#include "mbcommon/outcome.h"
+#include "util/roms.h"
 
 namespace mb
 {
 
-MB_EXPORT oc::result<std::wstring> mbs_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_mbs(std::wstring_view str);
-MB_EXPORT oc::result<std::wstring> utf8_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_utf8(std::wstring_view str);
+bool wipe_directory(const std::string &directory,
+                    const std::vector<std::string> &exclusions);
+bool wipe_system(const std::shared_ptr<Rom> &rom);
+bool wipe_cache(const std::shared_ptr<Rom> &rom);
+bool wipe_data(const std::shared_ptr<Rom> &rom);
+bool wipe_dalvik_cache(const std::shared_ptr<Rom> &rom);
+bool wipe_multiboot(const std::shared_ptr<Rom> &rom);
 
 }

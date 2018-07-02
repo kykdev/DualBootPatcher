@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018  Andrew Gunnerson <andrewgunnerson@gmail.com>
+ * Copyright (C) 2018  Andrew Gunnerson <andrewgunnerson@gmail.com>
  *
  * This file is part of DualBootPatcher
  *
@@ -19,18 +19,37 @@
 
 #pragma once
 
-#include "mbcommon/common.h"
+#include <optional>
+#include <thread>
 
-#include <string_view>
-
-#include "mbcommon/outcome.h"
+#include "boot/init/devices.h"
+#include "boot/init/uevent_listener.h"
 
 namespace mb
 {
 
-MB_EXPORT oc::result<std::wstring> mbs_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_mbs(std::wstring_view str);
-MB_EXPORT oc::result<std::wstring> utf8_to_wcs(std::string_view str);
-MB_EXPORT oc::result<std::string> wcs_to_utf8(std::wstring_view str);
+class UeventThread
+{
+public:
+    UeventThread();
+    ~UeventThread();
+
+    bool start();
+    bool stop();
+
+    const android::init::DeviceHandler & device_handler() const;
+
+private:
+    android::init::DeviceHandler m_device_handler;
+    // Need deferred initialization because the constructor opens a socket
+    std::optional<android::init::UeventListener> m_uevent_listener;
+
+    int m_cancel_pipe[2];
+
+    std::thread m_thread;
+    bool m_is_running;
+
+    void thread_func();
+};
 
 }
