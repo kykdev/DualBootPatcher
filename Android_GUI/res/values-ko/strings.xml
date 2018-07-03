@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   * Copyright (C) 2014-2015  Andrew Gunnerson <andrewgunnerson@gmail.com>
+   *
+   * This program is free software: you can redistribute it and/or modify
+   * it under the terms of the GNU General Public License as published by
+   * the Free Software Foundation, either version 3 of the License, or
+   * (at your option) any later version.
+   *
+   * This program is distributed in the hope that it will be useful,
+   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   * GNU General Public License for more details.
+   *
+   * You should have received a copy of the GNU General Public License
+   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<resources>
+    <!-- Name of the app built in release mode -->
+    <string name="app_name_release">Dual Boot Patcher</string>
+    <!-- Name of the app built in debug mode -->
+    <string name="app_name_debug">Dual Boot Patcher (Debug)</string>
+    <!-- Name of the app built in snapshot mode -->
+    <string name="app_name_snapshot">Dual Boot Patcher (Snapshot)</string>
+
+    <!-- Toast notification telling user to wait if the back button is pressed while an operation is still running (eg. switching or patching) -->
+    <string name="wait_until_finished">모든 작업이 끝날 때까지 기다려 주세요.</string>
+
+    <!-- Indicate the version of the app on the about screen -->
+    <string name="version">버전 %s</string>
+    <!-- GitHub source code web page URL -->
+    <string name="url_source_code" translatable="false">https://github.com/chenxiaolong/DualBootPatcher/tree/%s</string>
+    <!-- GitHub source code link text -->
+    <string name="link_source_code">소스 코드</string>
+    <!-- XDA forum thread web page URL -->
+    <string name="url_xda_thread" translatable="false">http://forum.xda-developers.com/showthread.php?t=2447534</string>
+    <!-- XDA forum thread link text -->
+    <string name="link_xda_thread">XDA 스레드</string>
+    <!-- Licenses URL -->
+    <string name="url_licenses" translatable="false">https://github.com/chenxiaolong/DualBootPatcher/tree/%s/licenses</string>
+    <!-- Licenses link text -->
+    <string name="link_licenses">라이센스</string>
+    <!-- Thank you message for contributors and links to relavent URLs -->
+    <string name="credits">Dual Boot Patcher를 만들 수 있도록 도와주신 모든 분들께 감사드립니다!</string>
+
+    <!-- Title for card shown in the switcher when the connection to mbtool failed -->
+    <string name="mbtool_connect_fail_title">mbtool에 연결할 수 없습니다.</string>
+    <!-- Message for the card shown in the switcher when the connection to mbtool failed -->
+    <string name="mbtool_connect_fail_message">애플리케이션이 mbtool에 연결하지 못했습니다.
+    루트 권한이 거부됐거나 램디스크가 최신이 아닌 것이 원인일 수 있습니다.
+    \n\n다시 시도하려면 누르십시오.</string>
+
+    <!-- Navigation drawer item for selecting the ROM -->
+    <string name="title_roms">롬</string>
+    <!-- Navigation drawer item for patching a zip file -->
+    <string name="title_patch_zip">Zip 파일 패치</string>
+    <!-- Navigation drawer item for checking free space -->
+    <string name="title_free_space">여유 공간</string>
+    <!-- Navigation drawer item for changing the ROM settings -->
+    <string name="title_rom_settings">설정</string>
+    <!-- Navigation drawer item for changing the app sharing settings -->
+    <string name="title_app_sharing">앱 공유</string>
+    <!-- Nagivation drawer item for rebooting the device -->
+    <string name="title_reboot">재부팅</string>
+    <!-- Navigation drawer item for showing the about screen -->
+    <string name="title_about">앱에 관하여</string>
+    <!-- Nagivation drawer item for exiting the app -->
+    <string name="title_exit">앱 종료</string>
+
+    <!-- Accessibility text for opening the app drawer -->
+    <string name="drawer_open">내비게이션 서랍 열기</string>
+    <!-- Accessibility text for closing the app drawer -->
+    <string name="drawer_close">내비게이션 서랍 닫기</string>
+
+    <!-- Default name for the primary ROM -->
+    <string name="primary">Primary</string>
+    <!-- Default name for the secondary ROM -->
+    <string name="secondary">Secondary</string>
+    <!-- Default name for the multi-slot ROMs -->
+    <string name="multislot">Multi Slot %s</string>
+    <!-- Default name for the data-slot ROMs -->
+    <string name="dataslot">%s (Data slot)</string>
+    <!-- Default name for the extsd-slot ROMs -->
+    <string name="extsdslot">%s (Extsd slot)</string>
+    <!-- Text shown when a ROM's version could not be detected -->
+    <string name="couldnt_determine_version">롬 버전을 알 수 없습니다.</string>
+
+    <!-- Title of progress dialog shown when switching ROMs -->
+    <string name="switching_rom">롬 전환</string>
+    <!-- Title of progress dialog shown when setting kernel -->
+    <string name="setting_kernel">커널 설정</string>
+    <!-- Message shown when switching ROMs succeeds -->
+    <string name="choose_rom_success">롬을 성공적으로 전환했습니다.</string>
+    <!-- Message shown when switching ROMs failed -->
+    <string name="choose_rom_failure">롬을 전환하지 못했습니다.</string>
+    <!-- Message shown when switching ROMs and checksums don't match -->
+    <string name="choose_rom_checksums_invalid">이미지 체크섬이 일치하지 않습니다.</string>
+    <!-- Message shown when switching ROMs and checksums are missing -->
+    <string name="choose_rom_checksums_missing">이미지 체크섬이 누락되었습니다.</string>
+    <!-- Message shown when setting the kernel succeeds -->
+    <string name="set_kernel_success">커널을 성공적으로 설정했습니다.</string>
+    <!-- Message shown when setting the kernel fails -->
+    <string name="set_kernel_failure">커널을 설정하지 못했습니다.</string>
+
+    <!-- Message shown when another application tries to switch the ROM via an intent -->
+    <string name="confirm_automated_switch_rom">다른 애플리케이션이 %s로 전환하려 하고 있습니다.
+            계속 진행하시겠습니까?</string>
+
+    <!-- Message shown if the boot partition could not be detected because the device codename is
+         not recognized -->
+    <string name="unknown_boot_partition">현재 기기의 코드네임 \'%s\'가 인식되지 않아 부트 파티션을 결정하지 못했습니다.</string>
+
+    <!-- Dialog message shown if the images' checksums don't match with switching ROMs -->
+    <string name="checksums_invalid">해당 롬의 boot.img나 /sdcard/MultiBoot/%s/의 다른 *.img 파일의 SHA512 체크섬이 예상된 체크섬과 다릅니다.
+        다른 애플리케이션이 이미지를 악의적으로 변경했을 수도 있습니다. 롬 전환을 진행하시겠습니까?</string>
+    <!-- Dialog message shown if the images' checksums don't exist when switching ROMs -->
+    <string name="checksums_missing">해당 롬의 boot.img나 /sdcard/MultiBoot/%s/의 다른 *.img 파일의 SHA512 체크섬이 누락되었습니다.
+    이전 버전의 DualBootPatcher에서 업그레이드할 때 발생했을 확률이 높습니다. 롬 전환을 계속 진행하시겠습니까?</string>
+
+    <!-- Version text shown on ROM card if the version could not be detected -->
+    <string name="rom_card_unknown_version">알 수 없는 버전</string>
+    <!-- Build text shown on ROM card if the build could not be detected -->
+    <string name="rom_card_unknown_build">알 수 없는 빌드</string>
+
+    <!-- ROM menu item for updating the ramdisk -->
+    <string name="rom_menu_update_ramdisk">램디스크 업데이트</string>
+    <!-- ROM menu item for setting kernel -->
+    <string name="rom_menu_set_kernel">커널 설정</string>
+    <!-- ROM menu item for backing up the ROM -->
+    <string name="rom_menu_backup_rom">롬 백업</string>
+    <!-- ROM menu item for adding an icon to the home screen -->
+    <string name="rom_menu_add_to_home_screen">홈 화면에 추가</string>
+    <!-- ROM menu item for changing the name -->
+    <string name="rom_menu_edit_name">이름 편집</string>
+    <!-- ROM menu item for changing the image -->
+    <string name="rom_menu_change_image">이미지 변경</string>
+    <!-- ROM menu item for resetting back to the default image -->
+    <string name="rom_menu_reset_image">이미지 초기화</string>
+    <!-- ROM menu item for wiping the ROM -->
+    <string name="rom_menu_wipe_rom">롬 초기화</string>
+
+    <!-- Snack bar message shown when a launcher is successfully created -->
+    <string name="successfully_created_launcher">%s를 성공적으로 홈 화면에 추가했습니다.</string>
+
+    <!-- Dialog shown when adding an icon to the home screen asking whether the device should
+         automatically reboot after switching -->
+    <string name="auto_reboot_after_switching">롬을 전환한 후에 자동으로 재부팅하시겠습니까?</string>
+
+    <!-- Target for wiping ROM's /system -->
+    <string name="wipe_target_system">시스템</string>
+    <!-- Target for wiping ROM's /cache -->
+    <string name="wipe_target_cache">캐시</string>
+    <!-- Target for wiping ROM's /data -->
+    <string name="wipe_target_data">데이터</string>
+    <!-- Target for wiping ROM's dalvik cache -->
+    <string name="wipe_target_dalvik_cache">달빅 캐시</string>
+    <!-- Target for wiping ROM's multiboot files -->
+    <string name="wipe_target_multiboot_files">MultiBoot 파일</string>
+
+    <!-- Title of dialog box asking for which targets to wipe -->
+    <string name="wipe_rom_dialog_title">선택한 항목 초기화</string>
+    <!-- Title of progress dialog shown when wiping targets -->
+    <string name="wiping_targets">선택한 항목 초기화하는 중</string>
+    <!-- Toast message indicating successfully wiped targets -->
+    <string name="wipe_rom_successfully_wiped">성공적으로 초기화했습니다: %s</string>
+    <!-- Toast message indicating targets that failed to wipe -->
+    <string name="wipe_rom_failed_to_wipe">초기화하지 못했습니다: %s</string>
+    <!-- Toast message indicating that the wipe process failed to start -->
+    <string name="wipe_rom_initiate_fail">롬 초기화 프로세스를 시작하지 못했습니다.</string>
+    <!-- Toast message shown if the user did not select any target to wipe -->
+    <string name="wipe_rom_none_selected">선택한 항목이 없어 초기화를 진행하지 않았습니다.</string>
+    <!-- Toast message shown if the user attempts to wipe any target for the current ROM -->
+    <string name="wipe_rom_no_wipe_current_rom">현재 구동중인 롬은 초기화할 수 없습니다.</string>
+
+    <!-- Switcher service notification title -->
+    <string name="switcher_service_background_service">백그라운드 서비스</string>
+
+    <!-- Error message shown if the user denies storage permissions to the app in Android >= 6.0. The ROM name and thumbnail cannot be loaded without being able to access /sdcard/MultiBoot. -->
+    <string name="switcher_storage_permission_required">저장공간 권한이 거부되어 롬 썸네일과 이름을 불러오지 못했습니다.</string>
+
+    <!-- Accessibility text for the ROM logo images -->
+    <string name="switcher_rom_image">롬 로고</string>
+
+    <!-- Title for the confirmation dialog box shown when trying to set the kernel -->
+    <string name="switcher_ask_set_kernel_title">커널을 설정하시겠습니까?</string>
+    <!-- Message for the confirmation dialog box shown when trying to set the kernel -->
+    <string name="switcher_ask_set_kernel_desc">현재 구동중인 커널이 %s의 커널로 저장됩니다.</string>
+
+    <!-- Title for the dialog box to rename a ROM -->
+    <string name="rename_rom_title">%s 이름 변경</string>
+    <!-- Message asking for a new ROM name (blank for the default) for the dialog box to rename a ROM -->
+    <string name="rename_rom_desc">%s의 새 이름을 입력하십시오. 기본값을 사용하려면 입력칸을 비워두십시오.</string>
+
+    <!-- Dialog message shown when the kernel has not been set -->
+    <string name="kernel_not_set_desc">현재 롬의 커널이 아직 설정되지 않았습니다.
+        지금 커널을 설정하시겠습니까?</string>
+    <!-- Dialog message shown when the saved kernel is different from the currently running kernel -->
+    <string name="kernel_different_from_saved_desc">저장된 커널이 현재 구동중인 커널과 다릅니다.
+        지금 커널을 설정하시겠습니까?</string>
+    <!-- Positive dialog button shown for the above two messages -->
+    <string name="set_kernel_now">지금 설정</string>
+    <!-- Negative dialog button shown for the above two messages -->
+    <string name="set_kernel_later">나중에 설정</string>
+
+    <!-- Dialog message shown when the user tries to set the kernel for the incorrect ROM -->
+    <string name="set_kernel_mismatched_rom">현재 선택된 롬은 %1$s이지만, %2$s의 커널을 설정하려 하고 있습니다.
+        원하시는 작업이 맞는지 확인하십시오.</string>
+
+    <!-- In-app flashing output activity title - shown when backing up a single ROM -->
+    <string name="in_app_flashing_title_backup_rom">롬 백업</string>
+    <!-- In-app flashing output activity title - shown when restoring a single ROM -->
+    <string name="in_app_flashing_title_restore_rom">롬 복원</string>
+    <!-- In-app flashing output activity title - shown when flashing a single file -->
+    <string name="in_app_flashing_title_flash_file">파일 플래싱</string>
+    <!-- In-app flashing output activity title - shown when flashing multiple files/backups -->
+    <string name="in_app_flashing_title_flash_files">파일 플래싱</string>
+    <!-- In-app flashing activity title -->
+    <string name="in_app_flashing_title">앱 내 플래싱</string>
+    <!-- FAB button text for adding a patched file to flash -->
+    <string name="in_app_flashing_fab_add_patched_file">패치된 파일 추가</string>
+    <!-- FAB button text for adding a backup to flash -->
+    <string name="in_app_flashing_fab_add_backup">백업 추가</string>
+    <!-- Title of pending action card for flashing a file -->
+    <string name="in_app_flashing_action_flash_file">파일 플래싱</string>
+    <!-- Title of pending action card for restoring a backup -->
+    <string name="in_app_flashing_action_restore_backup">백업 복원</string>
+    <!-- [Flash file] Subtitle text in pending action card showing the selected filename -->
+    <string name="in_app_flashing_filename">파일명: %s</string>
+    <!-- [Restore backup] Subtitle text in pending action card showing the selected backup name -->
+    <string name="in_app_flashing_backup_name">백업 이름: %s</string>
+    <!-- [Restore backup] Subtitle text in pending action card showing the restore targets -->
+    <string name="in_app_flashing_restore_targets">선택한 항목: %s</string>
+    <!-- Subtitle text in pending action card showing the installation location -->
+    <string name="in_app_flashing_location">롬 ID: %s</string>
+    <!-- Title shown in dialog asking for the installation location of a zip file -->
+    <string name="in_app_flashing_dialog_installation_location">설치 위치:</string>
+    <!-- Title shown in the progress dialog when verifying if a zip file can be flashed -->
+    <string name="in_app_flashing_dialog_verifying_zip">Zip 검증 중</string>
+    <!-- Error message shown when the selected zip file is not found -->
+    <string name="in_app_flashing_error_zip_not_found">선택한 zip 파일을 발견하지 못했습니다..</string>
+    <!-- Error message shown when the selected zip file could not be read -->
+    <string name="in_app_flashing_error_zip_read_fail">선택한 zip 파일을 읽어오지 못했습니다.</string>
+    <!-- Error message shown when the selected zip file isn't patched -->
+    <string name="in_app_flashing_error_not_multiboot">선택한 zip이 멀티부팅용으로 패치된 것 같지 않습니다.
+        플래싱하기 전에 파일을 먼저 패치해주십시오.</string>
+    <!-- Error message shown when the selected zip file was patched with an old version of the patcher -->
+    <string name="in_app_flashing_error_version_too_old">선택한 zip 파일을 앱 내에서 플래싱하려면 %s 혹은 더 새로운 버전으로 패치해야 합니다.</string>
+    <!-- Error message shown when the user tries to flash a zip file to the current ROM -->
+    <string name="in_app_flashing_error_no_overwrite_rom">시스템이 고장나거나 재부팅하는 걸 방지하기 위해 현재 롬 위에는 플래싱할 수 없습니다.</string>
+    <!-- Dialog message asking if the user wants to change the installation location of the zip -->
+    <string name="in_app_flashing_change_install_location_desc">선택한 zip 파일이 %s에 설치하도록 패치되었습니다.
+        설치 위치를 변경하시겠습니까?</string>
+    <!-- Dialog button for keeping the current installation location -->
+    <string name="in_app_flashing_keep_current_location">위치 유지</string>
+    <!-- Dialog button for changing the installation location -->
+    <string name="in_app_flashing_change_install_location">위치 변경</string>
+    <!-- Message shown in the first-use dialog for zip flashing -->
+    <string name="in_app_flashing_dialog_first_use">앱 내 플래싱 방법은 패치된 파일과 DualBootPatcher 백업 파일을 모두 플래싱할 수 있습니다.
+        플래싱을 시작하려면 \+ 버튼을 누르세요. 대기중인 작업은 드래그하거나 밀어서 순서를 변경하거나 대기 목록에서 없앨 수 있습니다.
+        \n\n주의: 이 기능은 아직 실험적입니다. 계속하기전에 백업하세요!</string>
+    <!-- Dialog description when choosing a backup to restore -->
+    <string name="in_app_flashing_select_backup_dialog_desc">복원할 백업을 목록에서 선택하십시오.</string>
+    <!-- Toast message shown if there are no backups available -->
+    <string name="in_app_flashing_no_backups_available">복원할 수 있는 백업이 없습니다.</string>
+
+    <!-- ROM details item showing which slot the ROM is installed to -->
+    <string name="rom_details_info_slot">슬롯</string>
+    <!-- ROM details item showing the version of the ROM -->
+    <string name="rom_details_info_version">버전</string>
+    <!-- ROM details item showing the build name of the ROM -->
+    <string name="rom_details_info_build">빌드</string>
+    <!-- ROM details item showing the mbtool version used to boot the ROM -->
+    <string name="rom_details_info_mbtool_status">mbtool 상태</string>
+    <!-- ROM details item showing the number of system apps, updated apps, and user apps -->
+    <string name="rom_details_info_apps_counts">앱</string>
+    <!-- ROM details value showing the number of system apps, updated apps, and user apps -->
+    <string name="rom_details_info_apps_counts_value">%1$s개의 시스템 앱, %2$s개의 업데이트된 앱,
+        %3$s개의 유저 앱</string>
+    <!-- ROM details item showing the path to the system directory or image -->
+    <string name="rom_details_info_system_path">시스템 경로</string>
+    <!-- ROM details item showing the path to the cache directory or image -->
+    <string name="rom_details_info_cache_path">캐시 경로</string>
+    <!-- ROM details item showing the path to the data directory or image -->
+    <string name="rom_details_info_data_path">데이터 경로</string>
+    <!-- ROM details item showing the size of the system directory or image -->
+    <string name="rom_details_info_system_size">시스템 크기</string>
+    <!-- ROM details item showing the size of the cache directory or image -->
+    <string name="rom_details_info_cache_size">캐시 크기</string>
+    <!-- ROM details item showing the size of the data directory or image -->
+    <string name="rom_details_info_data_size">데이터 크기</string>
+    <!-- ROM details item value shown when calculating the directory or image sizes -->
+    <string name="rom_details_info_calculating">계산하는 중…</string>
+
+    <!-- Backup ROM activity title -->
+    <string name="br_backup_title">롬 백업</string>
+    <!-- Restore ROM activity title -->
+    <string name="br_restore_title">롬 복원</string>
+
+    <!-- Backup targets dialog description -->
+    <string name="br_backup_targets_dialog_desc">백업할 대상을 선택하십시오.</string>
+    <!-- Restore targets dialog description -->
+    <string name="br_restore_targets_dialog_desc">복원할 항목을 선택하십시오.</string>
+
+    <!-- Backup/restore target for ROM's /system files -->
+    <string name="br_target_system">시스템</string>
+    <!-- Backup/restore target for ROM's /cache files -->
+    <string name="br_target_cache">캐시</string>
+    <!-- Backup/restore target for ROM's /data files -->
+    <string name="br_target_data">데이터</string>
+    <!-- Backup/restore target for ROM's boot image -->
+    <string name="br_target_boot">부트 이미지</string>
+    <!-- Backup/restore target for ROM's multiboot configuration files -->
+    <string name="br_target_config">멀티부팅 설정 파일</string>
+    <!-- Toast message shown if no backup/restore targets are selected -->
+    <string name="br_no_target_selected">백업/복원할 대상이 선택되지 않았습니다.</string>
+
+    <!-- Backup name input dialog description -->
+    <string name="br_name_dialog_desc">백업의 이름을 입력하십시오. 이름에 슬래시(\"/\")가 포함되어있거나 \".\" 혹은 \"..\"일 수 없습니다.</string>
+    <!-- Backup name input field hint for backup name dialog -->
+    <string name="br_name_dialog_hint">백업 이름을 입력하십시오…</string>
+
+    <!-- Text shown on blank background when no files have been added for patching yet -->
+    <string name="patcher_background_message">패치할 파일을 추가하려면 플로팅 액션 버튼을 누르십시오.</string>
+
+    <!-- Label for FAB to add a flashable zip -->
+    <string name="patcher_add_flashable_zip">플래싱용 zip 추가</string>
+    <!-- Label for FAB to add an Odin image -->
+    <string name="patcher_add_odin_image">오딘 이미지 추가</string>
+
+    <!-- Dialog error message shown if the user denies storage permissions to the app in Android >= 6.0. The patcher cannot patch files if it cannot read and write to the internal storage. -->
+    <string name="patcher_storage_permission_required">내장메모리의 읽기 및 쓰기 권한이 없으면 패치할 수 없습니다.
+        파일을 패치할 수 있도록 저장공간 권한을 허용해주십시오.</string>
+
+    <!-- Snackbar message shown if the user tries to patch the same file more than once -->
+    <string name="patcher_cannot_add_same_item">선택된 패치 결과 파일이 이미 대기 목록에 있습니다.</string>
+
+    <!-- Title of the device selection box in the patcher -->
+    <string name="patcher_device_title">기기:</string>
+    <!-- Title of the partition configuration box in the patcher -->
+    <string name="patcher_partconfig_title">파티션 구성:</string>
+    <!-- Title of the partition configuration description in the patcher -->
+    <string name="patcher_partconfig_desc_title">설명:</string>
+
+    <!-- Subtitle shown in patch file card indicating the target device and ROM ID -->
+    <string name="patcher_card_subtitle_target" translatable="false">%1$s / %2$s</string>
+    <!-- Subtitle shown in patch file card when patching succeeded -->
+    <string name="patcher_card_subtitle_succeeded">성공</string>
+    <!-- Subtitle shown in patch file card when patching failed -->
+    <string name="patcher_card_subtitle_failed">실패 (error code %s)</string>
+    <!-- Subtitle shown in patch file card when file is waiting to be patched -->
+    <string name="patcher_card_subtitle_pending">대기 중</string>
+    <!-- Subtitle shown in patch file card when patching has not yet started (queued) -->
+    <string name="patcher_card_subtitle_queued">대기 목록에 추가됨</string>
+    <!-- Subtitle shown in patch file card when patching has been cancelled -->
+    <string name="patcher_card_subtitle_cancelled">취소됨</string>
+
+    <!-- Patcher options dialog title -->
+    <string name="patcher_options_dialog_title">Patcher 옵션</string>
+
+    <!-- Description for all other installation locations -->
+    <string name="install_location_desc">%s에 롬 설치</string>
+    <!-- Text box hint for specifying the data slot ID -->
+    <string name="install_location_named_slot_id_hint">ID를 입력하십시오</string>
+    <!-- Description text shown if the data slot ID is empty -->
+    <string name="install_location_named_slot_id_empty">위에 ID를 입력하십시오</string>
+    <!-- Error tooltip shown if the data slot ID is empty -->
+    <string name="install_location_named_slot_id_error_is_empty">슬롯 ID는 비워둘 수 없습니다.</string>
+    <!-- Error tooltip shown if the data slot ID contains invalid characters -->
+    <string name="install_location_named_slot_id_error_invalid">슬롯 ID는 반드시 소문자 영어 알파벳이나 숫자만을 포함해야 합니다.</string>
+    <!-- Name for the data-slot installation location -->
+    <string name="install_location_data_slot">데이터 슬롯</string>
+    <!-- Name for the extsd-slot installation location -->
+    <string name="install_location_extsd_slot">외장메모리 슬롯</string>
+
+    <!-- Title for the dialog box indicating that no file manager is installed -->
+    <string name="filemanager_missing_title">파일 관리자가 없습니다.</string>
+    <!-- Message telling the user that no file manager is installed and that one needs to be installed to be able to patch a file -->
+    <string name="filemanager_missing_desc">적당한 파일 관리자가 설치되어 있지 않습니다.
+        패치할 파일을 선택하려면 파일 관리자를 설치하십시오.</string>
+
+    <!-- Text for the details card indicating that the patching is done -->
+    <string name="details_done">완료</string>
+
+    <!-- Text for the progress card showing how many files have been added to the new zip -->
+    <string name="overall_progress_files">%1$s/%2$s 파일</string>
+
+    <!-- Title for total size of partition -->
+    <string name="free_space_total_size">총 크기:</string>
+    <!-- Title for occupied space on partition -->
+    <string name="free_space_occupied_size">사용 중:</string>
+    <!-- Title for free space on partition -->
+    <string name="free_space_free_size">사용 가능:</string>
+    <!-- Format string for exbibytes -->
+    <string name="format_exbibytes" translatable="false">%s EiB</string>
+    <!-- Format string for pebibytes -->
+    <string name="format_pebibytes" translatable="false">%s PiB</string>
+    <!-- Format string for tebibytes -->
+    <string name="format_tebibytes" translatable="false">%s TiB</string>
+    <!-- Format string for gibibytes -->
+    <string name="format_gibibytes" translatable="false">%s GiB</string>
+    <!-- Format string for mebibytes -->
+    <string name="format_mebibytes" translatable="false">%s MiB</string>
+    <!-- Format string for kibibytes -->
+    <string name="format_kibibytes" translatable="false">%s KiB</string>
+    <!-- Format string for bytes -->
+    <string name="format_bytes" translatable="false">%s B</string>
+
+    <!-- Title for the individual application sharing section of the ROM settings -->
+    <string name="a_s_settings_indiv_app_sharing_section_title">개별 애플리케이션 공유</string>
+
+    <!-- Title for the preference to share individual applications -->
+    <string name="a_s_settings_indiv_app_sharing_title">개별 애플리케이션 공유</string>
+    <!-- Description for the preference to share individual applications -->
+    <string name="a_s_settings_indiv_app_sharing_desc">롬 간에 개별 애플리케이션 공유
+        (재부팅 필요).</string>
+    <!-- Title for the preference to manage shared apps for individual app sharing -->
+    <string name="a_s_settings_manage_shared_apps_title">공유중인 앱 관리</string>
+    <!-- Description for the preference to manage shared apps for individual app sharing -->
+    <string name="a_s_settings_manage_shared_apps_desc">개별 앱 공유에서 어떤 앱을 공유할지 선택하십시오.</string>
+
+    <!-- Error message shown if the user denies storage permissions to the app in Android >= 6.0. The app sharing settings cannot be saved if it cannot read and write to the internal storage. -->
+    <string name="a_s_settings_storage_permission_required">저장공간 권한이 거부되어 앱 공유 설정을 저장하지 못했습니다.
+        앱 공유 설정을 변경하려면 저장공간 권한을 허용하십시오.</string>
+
+    <!-- Dialog message shown the the mbtool version is too old and needs to be updated -->
+    <string name="a_s_settings_version_too_old">앱 공유 기능을 이용하려면 mbtool이 업데이트되어야 합니다.
+        램디스크를 업데이트하십시오.</string>
+
+    <!-- Preference for updating the ramdisk -->
+    <string name="update_ramdisk_title">램디스크 업데이트</string>
+
+    <!-- Description for the ramdisk update preference when the ramdisk doesn't contain mbtool -->
+    <string name="update_ramdisk_missing_desc">현재 램디스크에는 어떤 버전의 mbtool도 없습니다.</string>
+    <!-- Description for the ramdisk update preference when the ramdisk is outdated -->
+    <string name="update_ramdisk_outdated_desc">현재 램디스크의 mbtool이 구버전입니다.</string>
+    <!-- Description for the ramdisk update preference when the ramdisk is already up to date -->
+    <string name="update_ramdisk_up_to_date_desc">램디스크가 이미 최신입니다.</string>
+    <!-- Title when ramdisk is successfully updated -->
+
+    <string name="update_ramdisk_success_title">램디스크를 성공적으로 업데이트했습니다.</string>
+    <!-- Message asking user to reboot when the ramdisk updating succeeds -->
+    <string name="update_ramdisk_reboot_desc">램디스크가 성공적으로 업데이트되었습니다. 지금 재부팅하시겠습니까?</string>
+    <!-- Message telling user that the ramdisk updating succeeded -->
+    <string name="update_ramdisk_no_reboot_desc">램디스크가 성공적으로 업데이트되었습니다.</string>
+    <!-- Title when ramdisk failed to update -->
+    <string name="update_ramdisk_failure_title">램디스크를 업데이트하지 못했습니다.</string>
+    <!-- Message telling the user that app sharing will not work if the ramdisk updating failed -->
+    <string name="update_ramdisk_failure_desc">램디스크를 업데이트하지 못했습니다.
+        로그가 내장메모리의 MultiBoot/ramdisk-update.log에 저장되었습니다.</string>
+
+    <!-- Toast popup message containing the countdown for forcing a ramdisk update -->
+    <plurals name="force_update_ramdisk_countdown">
+        <item quantity="one">램디스크 강제 업데이트가 %1$d단계 남았습니다.</item>
+        <item quantity="other">램디스크 강제 업데이트가 %1$d단계 남았습니다.</item>
+    </plurals>
+    <!-- Toast popup message shown when the user forces a ramdisk update -->
+    <string name="force_updating_ramdisk">램디스크 강제 업데이트중</string>
+
+    <!-- Title for the section in the settings to manage the Boot UI -->
+    <string name="rom_settings_boot_ui_title">부트 UI (EXPERIMENTAL)</string>
+    <!-- Title for the preference to install the Boot UI -->
+    <string name="rom_settings_boot_ui_install_title">부트 UI 설치</string>
+    <!-- Title for the preference to update the Boot UI -->
+    <string name="rom_settings_boot_ui_update_title">부트 UI 업데이트</string>
+    <!-- Title for the preference to uninstall the Boot UI -->
+    <string name="rom_settings_boot_ui_uninstall_title">부트 UI 제거</string>
+    <!-- Summary for the Update Boot UI preference to indicate that an update is available -->
+    <string name="rom_settings_boot_ui_update_available">업데이트 사용 가능: %s</string>
+    <!-- Summary for the Update Boot UI preference to indicate that the Boot UI is up to date -->
+    <string name="rom_settings_boot_ui_up_to_date">최신</string>
+    <!-- Summary for the Uninstall Boot UI preference to indicate that the Boot UI is not installed -->
+    <string name="rom_settings_boot_ui_not_installed">설치되어 있지 않음</string>
+    <!-- Summary for all the Boot UI preferences to indicate that the Boot UI is not supported for the device -->
+    <string name="rom_settings_boot_ui_not_supported">이 기기에서 지원되지 않음</string>
+    <!-- Toast message to indicate that the Boot UI was successfully installed -->
+    <string name="rom_settings_boot_ui_install_success">부트 UI를 성공적으로 설치했습니다.</string>
+    <!-- Toast message to indicate that the Boot UI failed to install -->
+    <string name="rom_settings_boot_ui_install_failure">부트 UI를 설치하지 못했습니다.</string>
+    <!-- Toast message to indicate that the Boot UI was successfully uninstalled -->
+    <string name="rom_settings_boot_ui_uninstall_success">부트 UI를 성공적으로 제거했습니다.</string>
+    <!-- Toast message to indicate that the Boot UI failed to uninstall -->
+    <string name="rom_settings_boot_ui_uninstall_failure">부트 UI를 제거하지 못했습니다.</string>
+    <!-- Dialog message shown after the Boot UI has been installed indicating that the ramdisk must be updated -->
+    <string name="rom_settings_boot_ui_update_ramdisk_msg">부트 UI가 성공적으로 설치되었습니다.
+        모든 롬의 램디스크를 최신 버전으로 유지하십시오. 그렇지 않으면 부팅 중에 부트 UI가 로드되지 않을 것입니다.</string>
+
+    <!-- Title for the section in ROM Settings to change backup/restore settings -->
+    <string name="rom_settings_backup_title">백업/복원 (EXPERIMENTAL)</string>
+    <!-- Title for the preference to change the backup directory -->
+    <string name="rom_settings_backup_change_directory">백업 폴더 변경</string>
+
+    <!-- Title for the section in ROM Settings to change settings related to the patcher -->
+    <string name="rom_settings_patcher_title">Patcher</string>
+    <!-- Title for the preference to show the exit button in the navigation drawer -->
+    <string name="rom_settings_show_exit_title">종료 버튼 보이기</string>
+    <!-- Title for the preference to show the reboot button in the navigation drawer -->
+    <string name="rom_settings_show_reboot_title">재부팅 버튼 보이기</string>
+    <!-- Title for the preference to choose the initial screen to show when opening the app -->
+    <string name="rom_settings_initial_screen_title">초기 화면</string>
+    <!-- Description for the initial screen preference -->
+    <string name="rom_settings_initial_screen_desc">앱을 열었을 때 보이는 첫 번째 화면</string>
+    <!-- Title for the preference to use the dark theme -->
+    <string name="rom_settings_use_dark_theme">어두운 테마 사용</string>
+    <!-- Title for the preference to enable receiving intents from third party applications -->
+    <string name="rom_settings_allow_intents_title">인텐트 받기 허용</string>
+    <!-- Description for the preference to enable receiving intents from third party applications -->
+    <string name="rom_settings_allow_intents_desc">다른 앱이 이 앱으로 인텐트를 보내 롬 전환 및 파일 패치 등의 작업을 수행하도록
+        허락합니다.</string>
+    <!-- Title for the preference to enable confirmation dialog before rebooting -->
+    <string name="rom_settings_show_reboot_confirm_title">재부팅 대화 상자 보이기</string>
+    <!-- Description for the preference to enable confirmation dialog before rebooting -->
+    <string name="rom_settings_show_reboot_confirm_desc">바로 재부팅하는 대신 안드로이드의 재부팅 대화 상자를 표시하여
+        고급 재부팅 메뉴가 있는 롬에서 리커버리로 재부팅할 수 있도록 합니다.</string>
+    <!-- Title for the preference to set the number of parallel patching operations -->
+    <string name="rom_settings_parallel_patching_title">병렬 패치 작업</string>
+    <!-- Description for the preference to set the number of parallel patching operations -->
+    <string name="rom_settings_parallel_patching_desc">패치 대기 목록에 여러 개의 파일이 있을 때, 한 번에 %d개씩 진행합니다.</string>
+
+    <!-- Title for the dialog box explaining individual application sharing -->
+    <string name="indiv_app_sharing_intro_dialog_title">개별 앱 공유</string>
+    <!-- Description for the dialog box explaining individual application sharing -->
+    <string name="indiv_app_sharing_intro_dialog_desc">개별 앱 공유는 애플리케이션의 데이터가 모든 롬에서 접근 가능한 공유되는 공간에 저장될 수 있도록 합니다.
+	    공유된 데이터를 사용하면 앱의 데이터가 모든 롬에서 동기화됩니다.(예: 크롬 탭)\n\n주의: 변경 사항이 반영되려면 재부팅해야 합니다.
+        개별 앱 공유를 사용하려면, 각 롬에서 데이터 공유가 활성화되어야 합니다.
+        예를 들어 Primary 롬에서 크롬의 데이터 공유를 활성화하면 크롬은 공유된 데이터 폴더를 사용하기 시작합니다.
+        그러고 나서 다른 롬으로 부팅하여 크롬의 데이터 공유를 활성화하면 이제 똑같은 공유된 폴더를 사용할 것입니다.</string>
+
+    <!-- App label in the individual app sharing screen shown if the app uses shared data -->
+    <string name="indiv_app_sharing_shared_data">공유된 데이터</string>
+    <!-- App label in the individual app sharing screen shown if the app is not shared -->
+    <string name="indiv_app_sharing_not_shared">공유되지 않음</string>
+
+    <!-- App sharing dialog checkbox text for using shared app data -->
+    <string name="indiv_app_sharing_dialog_share_data">공유된 데이터 사용</string>
+    <!-- App sharing dialog message shown by default -->
+    <string name="indiv_app_sharing_dialog_default_message">앱이 공유된 데이터를 사용할지 말지를 선택합니다.</string>
+    <!-- Message in the app sharing dialog showing the list of ROMs using the shared data -->
+    <string name="indiv_app_sharing_other_roms_using_shared_data">공유된 데이터를 사용하고 있는 다른 롬:
+        %s</string>
+
+    <!-- Toast popup message shown when the user leaves the shared apps list indicating that a reboot is needed for the changes to take effect -->
+    <string name="indiv_app_sharing_reboot_needed_message">다음 재부팅 시 변경 사항이 반영됩니다.</string>
+
+    <!-- Toast popup message shown when a shared app is uninstalled (and thus becomes unshared) -->
+    <string name="indiv_app_sharing_app_no_longer_shared">앱 \'%s\' 이 더 이상 공유되지 않습니다.</string>
+
+    <!-- Toast popup message shown when a 3rd party app tries to send an intent to this app when the corresponding setting is disabled -->
+    <string name="third_party_intents_not_allowed">다른 앱에서 보낸 인텐트를 거부했습니다. 다른 앱이 인텐트를 보내는 것을 허용하려면,
+        DualBootPatcher 설정에서 옵션을 활성화하십시오.</string>
+
+    <!-- Progress dialog message shown when starting mbtool (with root) -->
+    <string name="mbtool_dialog_starting_mbtool">mbtool을 시작하는중…\n(루팅 필요)</string>
+    <!-- Progress dialog message shown when updating mbtool (with root) -->
+    <string name="mbtool_dialog_updating_mbtool">mbtool을 업데이트하는 중…\n(루팅 필요)</string>
+    <!-- Yes/no dialog message shown when mbtool rejects the connection due to invalid signatures -->
+    <string name="mbtool_dialog_signature_check_fail">mbtool이 이 앱으로부터의 연결을 거부했습니다.
+        이 앱의 비공식 빌드를 사용중이거나 앱이 악의적으로 변조됐을 가능성이 있습니다.
+        그냥 진행하면 mbtool이 강제로 종료되고 동봉된 mbtool이 루트 권한을 사용하여 실행됩니다.</string>
+    <!-- Yes/no dialog message shown when mbtool is too old and needs to be updated using root -->
+    <string name="mbtool_dialog_version_too_old">현재 mbtool 버전이 너무 오래되었습니다. 롬 전환 등 특정 기능이 작동하기 위해서 업데이트되어야 합니다.
+        이 작업은 루트 권한이 필요합니다.</string>
+    <!-- Confirm dialog message shown when updating mbtool failed -->
+    <string name="mbtool_dialog_update_failed">mbtool을 업데이트하지 못했습니다. 롬 전환 등 많은 기능이 작동하지 않을 것입니다.</string>
+
+    <!-- Path chooser dialog textbox hint for entering a filename -->
+    <string name="path_chooser_enter_a_filename">파일명을 입력하십시오.</string>
+    <!-- Path chooser dialog button to select a directory -->
+    <string name="path_chooser_choose_label">선택</string>
+    <!-- Path chooser dialog button to save a file -->
+    <string name="path_chooser_save_label">저장</string>
+    <!-- Path chooser dialog button to create a new folder -->
+    <string name="path_chooser_new_folder_label">새 폴더</string>
+
+    <!-- Android 8.0+ notification channel name for background services -->
+    <string name="notification_channel_background_services_name">백그라운드 서비스</string>
+    <!-- Android 8.0+ notification channel description for background services -->
+    <string name="notification_channel_background_services_desc">백그라운드 서비스가 작동되는 동안 지속적인 알림이 표시됩니다.</string>
+
+    <!-- Word/phrase for Search (used in action bars) -->
+    <string name="search">검색</string>
+    <!-- Word/phrase for None (used in eg. a list) -->
+    <string name="none">없음</string>
+    <!-- Word/phrase for OK (used in dialog boxes) -->
+    <string name="ok">확인</string>
+    <!-- Word/phrase for Cancel (used in dialog boxes) -->
+    <string name="cancel">취소</string>
+    <!-- Word/phrase for Continue (used in dialog boxes) -->
+    <string name="proceed">계속</string>
+    <!-- Word/phrase for Yes (used in dialog boxes) -->
+    <string name="yes">예</string>
+    <!-- Word/phrase for No (used in dialog boxes) -->
+    <string name="no">아니요</string>
+    <!-- Word/phrase for try again (used in dialog boxes) -->
+    <string name="try_again">다시 시도</string>
+    <!-- Reboot now (used in dialog boxes) -->
+    <string name="reboot_now">지금 재부팅</string>
+    <!-- Reboot later (used in dialog boxes) -->
+    <string name="reboot_later">나중에 재부팅</string>
+    <!-- Unknown (used when a value cannot be determined) -->
+    <string name="unknown">알 수 없음</string>
+
+    <!-- Text for checkbox in dialogs indicating that the dialog should not be shown again -->
+    <string name="do_not_show_again">다시 표시하지 않음</string>
+    <!-- Text shown in a progress dialog asking the user to wait -->
+    <string name="please_wait">기다려 주십시오</string>
+</resources>
