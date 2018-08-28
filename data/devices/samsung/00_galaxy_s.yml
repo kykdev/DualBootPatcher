@@ -1117,6 +1117,9 @@
       - /dev/block/bootdevice/by-name/RADIO
       - /dev/block/platform/11120000.ufs/by-name/RADIO
       - /dev/block/sda12
+      - /dev/block/bootdevice/by-name/VENDOR
+      - /dev/block/platform/11120000.ufs/by-name/VENDOR
+      - /dev/block/sda19
 
   boot_ui:
     supported: true
