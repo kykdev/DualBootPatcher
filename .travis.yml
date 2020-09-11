@@ -7,8 +7,8 @@ before_install:
   # Clone DualBootPatcher Repository
   - git clone --recursive https://github.com/lazyyq/DualBootPatcher -b manta DualBootPatcher/ > /dev/null 2>&1
   # Pull docker images
-  - docker pull kykint/dualbootpatcher:9.3.0-14-base > /dev/null
-  - docker pull kykint/dualbootpatcher:9.3.0-14-android > /dev/null
+  - docker pull kykint/dualbootpatcher:9.3.0-14-base
+  - docker pull kykint/dualbootpatcher:9.3.0-14-android
   #- docker pull yshalsager/dualbootpatcher:9.3.0-9-linux > /dev/null
 script:
   # Make work directories 
