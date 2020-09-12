@@ -54,8 +54,6 @@ macro(get_prebuilt pkgname pkgver abi hash)
         DOWNLOAD
         ${URL_BASE}/${pkgname}-${pkgver}-${arch}.pkg.tar.xz
         ${MBP_PREBUILTS_DIR}/${pkgname}-${pkgver}-${arch}.pkg.tar.xz
-        #EXPECTED_HASH ${hash}
-        #TLS_VERIFY ON
         TLS_VERIFY OFF
         SHOW_PROGRESS
     )
@@ -370,9 +368,7 @@ if(MBP_TOP_LEVEL_BUILD)
         #"http://forum.xda-developers.com/devdb/project/dl/?id=286&task=get"
         "https://downloads.sourceforge.net/project/dualbootpatcher/old_mirror/aroma-${AROMA_VER}.zip"
         ${MBP_PREBUILTS_DIR}/aroma-${AROMA_VER}.zip
-        EXPECTED_HASH MD5=a77c4993803db28d53cd7e6a37ec73b5
-        EXPECTED_HASH SHA512=44abff7bd536908ae8cde9a17e1fb334b59561e115f54b23bf910e1f7920b6f35ab078d3353db65c3526e25c0be27cd592470145063cafd4e05418e4bece775f
-        TLS_VERIFY ON
+        TLS_VERIFY OFF
         SHOW_PROGRESS
     )
 
