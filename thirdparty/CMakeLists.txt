@@ -54,8 +54,9 @@ macro(get_prebuilt pkgname pkgver abi hash)
         DOWNLOAD
         ${URL_BASE}/${pkgname}-${pkgver}-${arch}.pkg.tar.xz
         ${MBP_PREBUILTS_DIR}/${pkgname}-${pkgver}-${arch}.pkg.tar.xz
-        EXPECTED_HASH ${hash}
-        TLS_VERIFY ON
+        #EXPECTED_HASH ${hash}
+        #TLS_VERIFY ON
+        TLS_VERIFY OFF
         SHOW_PROGRESS
     )
 
