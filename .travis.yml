@@ -17,6 +17,7 @@ script:
   # Build APK
   - |
     docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/builder/DualBootPatcher:rw,z" -v "${HOME}/.android:/builder/.android:rw,z" yshalsager/dualbootpatcher:9.3.0-9-android bash << EOF
+    yes | sdkmanager 'build-tools;28.0.3' 'platforms;android-28' | grep -v '\[[= ]\+\]'
     cd DualBootPatcher/builder && ( cmake .. -DMBP_BUILD_TARGET=android -DMBP_BUILD_TYPE=debug && make -j16 && rm -rf assets && cpack && make apk -j16 ) > /dev/null
     ( make android-system_armeabi-v7a -j16 && make -C data/devices -j16 ) > /dev/null
     exit
