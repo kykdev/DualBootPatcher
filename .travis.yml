@@ -38,7 +38,7 @@ after_success:
   - md5sum ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/utilities/DualBootUtilities-9.3.0.zip
   #- ls -l ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/DualBootPatcher-9.3.0-Linux.zip
   #- md5sum ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/DualBootPatcher-9.3.0-Linux.zip
-  # Upload to 0x0.st
-  - cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/Android_GUI/build/outputs/apk/debug/ && curl -F'file=@Android_GUI-debug.apk' https://0x0.st
-  - cd ${TRAVIS_BUILD_DIR}//DualBootPatcher/builder/utilities/ && curl -F'file=@DualBootUtilities-9.3.0.zip' https://0x0.st
-  #- cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/ && curl -F'file=@DualBootPatcher-9.3.0-Linux.zip' https://0x0.st
+  # Upload to bashupload.com
+  - cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/Android_GUI/build/outputs/apk/debug/ && curl https://bashupload.com/Android_GUI-debug.apk --data-binary @Android_GUI-debug.apk
+  - cd ${TRAVIS_BUILD_DIR}//DualBootPatcher/builder/utilities/ && curl https://bashupload.com/DualBootUtilities-9.3.0.zip --data-binary @DualBootUtilities-9.3.0.zip
+  #- cd ${TRAVIS_BUILD_DIR}/DualBootPatcher/builder/ && curl https://bashupload.com/DualBootPatcher-9.3.0-Linux.zip --data-binary @DualBootPatcher-9.3.0-Linux.zip
