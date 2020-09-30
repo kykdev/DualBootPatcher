@@ -458,9 +458,15 @@ bool Installer::mount_efs() const
     std::string manufacturer =
             util::property_get_string("ro.product.manufacturer", {});
     std::string brand = util::property_get_string("ro.product.brand", {});
+    std::string board = util::property_get_string("ro.product.board", {});
+    std::string device = util::property_get_string("ro.product.device", {});
+    std::string model = util::property_get_string("ro.product.name", {});
 
-    if (strcasecmp(manufacturer.c_str(), "samsung") != 0
-            && strcasecmp(brand.c_str(), "samsung") != 0) {
+    if ((strcasecmp(manufacturer.c_str(), "samsung") != 0
+            && strcasecmp(brand.c_str(), "samsung") != 0)
+            || (strcasecmp(board.c_str(), "manta") == 0
+            || strcasecmp(device.c_str(), "manta") == 0
+            || strcasecmp(model.c_str(), "manta") == 0)) {
         LOGD("Not mounting EFS partition because this is not a Samsung device");
         return true;
     }
